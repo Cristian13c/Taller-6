@@ -1,8 +1,10 @@
-package uniandes.dpoo.taller2.modelo;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import uniandes.dpoo.taller2.modelo.ProductoMenu;
 
 class ProductoMenuTest
 {
@@ -15,7 +17,10 @@ class ProductoMenuTest
         assertEquals("Hamburguesa", producto.getNombre());
         assertEquals(10000, producto.getPrecio());
 	}
-
+	@Test
+    public void testConstructorConPrecioNegativo() {
+        assertThrows(IllegalArgumentException.class, () -> new ProductoMenu("Hamburguesa", -10000));
+    }
 	@Test
 	void testGenerarTextoFactura()
 	{

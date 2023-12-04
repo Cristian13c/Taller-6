@@ -9,6 +9,14 @@ public class ProductoMenu implements Producto
 	// Constructor
 	public ProductoMenu(String nombre, int precioBase)
 	{
+		if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("Hay un producto menu con nombre nulo o vacío.");
+        }
+
+        if (precioBase < 0) {
+            throw new IllegalArgumentException("Hay un producto menu con precio negativo.");
+        }
+        
 		this.nombre = nombre;
 		this.precioBase = precioBase;
 	}

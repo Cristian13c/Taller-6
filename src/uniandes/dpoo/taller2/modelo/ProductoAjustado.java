@@ -5,17 +5,16 @@ import java.util.ArrayList;
 public class ProductoAjustado implements Producto
 {
 	// Atributos
-	ProductoMenu base;
-	ArrayList<Ingrediente> agregados = new ArrayList<Ingrediente>();
-	ArrayList<Ingrediente> eliminados = new ArrayList<Ingrediente>();
-	
+	private ProductoMenu base;
+	private ArrayList<Ingrediente> agregados = new ArrayList<Ingrediente>();
+	private ArrayList<Ingrediente> eliminados = new ArrayList<Ingrediente>();
 
 	// Constructor
 	public ProductoAjustado(ProductoMenu base)
 	{
 		this.base = base;
 	}
-	
+
 	// Metodos
 	public void agregarOEliminarIngrediente(Ingrediente ingrediente)
 	{
@@ -26,9 +25,12 @@ public class ProductoAjustado implements Producto
 	public int getPrecio()
 	{
 		int precio = base.getPrecio();
-		for (Ingrediente ingrediente:agregados)
+		if (agregados.size() > 0)
 		{
-			precio += ingrediente.getCostoAdicional();
+			for (Ingrediente ingrediente : agregados)
+			{
+				precio += ingrediente.getCostoAdicional();
+			}
 		}
 		return precio;
 	}
@@ -36,15 +38,26 @@ public class ProductoAjustado implements Producto
 	@Override
 	public String getNombre()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return base.getNombre();
 	}
 
 	@Override
 	public String generarTextoFactura()
 	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+		String textoFactura = getNombre() + " " + Integer.toString(getPrecio())
+				+ "$";
+		if (agregados.size() != 0)
+		{
+			for (Ingrediente agregado : agregados)
+			{
+				textoFactura = textoFactura + "\r"
+						+ "  -Ingredientes Agregados:\r" + "   -"
+						+ agregado.getNombre() + " "
+						+ Integer.toString(agregado.getCostoAdicional()) + "$";
+
+			}
+		}
+		return textoFactura;
+	}
 }

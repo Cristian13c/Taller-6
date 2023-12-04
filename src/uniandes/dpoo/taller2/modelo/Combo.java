@@ -33,7 +33,7 @@ public class Combo implements Producto
 		while (i < itemsCombo.size())
 		{
 			i++;
-			item = itemsCombo.get(i-1);
+			item = itemsCombo.get(i - 1);
 			precio += item.getPrecio();
 		}
 		precio = (int) (precio - (precio * (descuento / 100)));
@@ -43,16 +43,26 @@ public class Combo implements Producto
 	@Override
 	public String getNombre()
 	{
-		// TODO Auto-generated method stub
 		return nombreCombo;
 	}
 
 	@Override
 	public String generarTextoFactura()
 	{
-		// TODO Auto-generated method stub
+		String textoFactura = nombreCombo + " " + Integer.toString(getPrecio())
+				+ "$" ;
+		if (itemsCombo.size() != 0)
+		{
+			for (Producto item : itemsCombo)
+			{
+				textoFactura = textoFactura + "\r" + "  - " + item.getNombre()
+						+ ", con un precio de: "
+						+ Integer.toString(item.getPrecio())
+						+ "$";
+			}
+		}
+		return textoFactura;
 
-		return null;
 	}
 
 }
