@@ -72,7 +72,7 @@ public class Pedido
 		return (int) (precioIva);
 	}
 
-	private String generarTextoFactura()
+	public String generarTextoFactura()
 	{
 		String textofactura = "";
 		textofactura = "Id: " + Integer.toString(idPedido) + "\r" + //
